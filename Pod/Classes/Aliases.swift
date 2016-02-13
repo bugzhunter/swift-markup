@@ -1,0 +1,1 @@
+//global aliases for SwiftMarkup class functions
