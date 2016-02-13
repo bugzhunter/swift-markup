@@ -13,27 +13,62 @@ public class SwiftMarkup {
     public class func createElement(ViewClass: UIView.Type,
         width: CGFloat? = nil, height: CGFloat? = nil,
         percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
-        backgroundColor: UIColor? = nil, backgroundColorARGB: UInt? = nil,
+        backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
         content: ContentBlock? = nil) {
             
             let view = ViewClass.init()
-            
+            //add to parent
             if let topView = topView {
                 topView.addSubview(view)
             }
+            
+            //manage colors
+            if let backgroundColor = backgroundColor {
+                view.backgroundColor = backgroundColor
+            }
+            if let rgb = backgroundColorRGB {
+                view.backgroundColor = UIColor.colorFromARGB(0xFF000000 + rgb)
+            }
+            
+            //manage layout
+            view.translatesAutoresizingMaskIntoConstraints = false
+            //manage width
+            if let width = width {
+                let widthConstraint = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: width)
+                view.addConstraint(widthConstraint)
+            }
+            else if let percentWidth = percentWidth {
+                if let parent = topView {
+                    let widthMultiplier = percentWidth / 100
+                    let leftConstraint = NSLayoutConstraint(item: view, attribute: .Left, relatedBy: .Equal, toItem: parent, attribute: .Left, multiplier: 1, constant: 0)
+                    let rightConstraint = NSLayoutConstraint(item: view, attribute: .Right, relatedBy: .Equal, toItem: parent, attribute: .Right, multiplier: widthMultiplier, constant: 0)
+                    parent.addConstraint(leftConstraint)
+                    parent.addConstraint(rightConstraint)
+                }
+            }
+            
+            //manage height
+            if let height = height {
+                let heightConstraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: height)
+                view.addConstraint(heightConstraint)
+            }
+            else if let percentHeight = percentHeight {
+                if let parent = topView {
+                    let heightMultiplier = percentHeight / 100
+                    let topConstraint = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: parent, attribute: .Top, multiplier: 1, constant: 0)
+                    let bottomConstraint = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: parent, attribute: .Bottom, multiplier: heightMultiplier, constant: 0)
+                    parent.addConstraint(topConstraint)
+                    parent.addConstraint(bottomConstraint)
+                }
+            }
+            
             
             //TODO avoid possible code duplication
             let savedTopView = topView
             topView = view
             content?()
             topView = savedTopView
-            
-            if let backgroundColor = backgroundColor {
-                view.backgroundColor = backgroundColor
-            }
-            if let argb = backgroundColorARGB {
-                view.backgroundColor = UIColor.colorFromARGB(argb)
-            }
+
     }
     
     public class func createElement(ButtonClass: UIButton.Type) {
