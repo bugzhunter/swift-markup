@@ -17,7 +17,6 @@ public class SwiftMarkup {
         content: ContentBlock? = nil) {
             
             let view = ViewClass.init()
-            //add to parent
             topView?.addSubview(view)
 
             
@@ -37,21 +36,31 @@ public class SwiftMarkup {
 
     }
     
-    public class func createElement(ButtonClass: UIButton.Type) {
-        //        let view = ViewClass.init()
-        //
-        //        if let topView = topView {
-        //            topView.addSubview(view)
-        //        }
-        //
-        //        //TODO avoid possible code duplication
-        //        let savedTopView = topView
-        //        topView = view
-        //        content?()
-        //        topView = savedTopView
+    public class func createElement(ButtonClass: UIButton.Type,
+        width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
+        top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
+        title: String? = nil, targetActions: [(target: AnyObject, action: Selector, events: UIControlEvents)]? = nil) {
+            
+            let button = ButtonClass.init()
+            topView?.addSubview(button)
+            
+            manageLayout(button, parent: topView,
+                width: width, height: height, percentWidth: percentWidth, percentHeight: percentHeight,
+                top: top, right: right, bottom: bottom, left: left
+            )
+            
+            if let title = title {
+                button.setTitle(title, forState: .Normal)
+            }
+            if let actions = targetActions {
+                for item in actions {
+                    button.addTarget(item.target, action: item.action, forControlEvents: item.events)
+                }
+            }
+    
     }
     
-    public class func createElement(TableViewClass: UITableView.Type,
+    public class func createElement(TableViewClass: UITableView.Type, inout id: UITableView?,
         width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
         top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
         backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
@@ -60,7 +69,7 @@ public class SwiftMarkup {
             
             let tableView = TableViewClass.init()
             afterInit?(tableView: tableView)
-            //add to parent
+            id = tableView
             topView?.addSubview(tableView)
             
             manageBackground(tableView, backgroundColor: backgroundColor, backgroundColorRGB: backgroundColorRGB)
