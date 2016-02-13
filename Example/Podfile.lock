@@ -1,0 +1,14 @@
+PODS:
+  - SwiftMarkup (0.1.0)
+
+DEPENDENCIES:
+  - SwiftMarkup (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftMarkup:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SwiftMarkup: 446bad459bb9b659f5f9da0d0191b60ce102e86f
+
+COCOAPODS: 0.39.0

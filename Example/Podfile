@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'SwiftMarkup_Example', :exclusive => true do
+  pod 'SwiftMarkup', :path => '../'
+end
+
+target 'SwiftMarkup_Tests', :exclusive => true do
+  pod 'SwiftMarkup', :path => '../'
+
+  
+end
