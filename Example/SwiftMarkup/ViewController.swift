@@ -12,9 +12,9 @@ class ViewController: UIViewController, UITableViewDataSource {
             SwiftMarkup.createElement(UIView.self, percentWidth: 100, height: 200, backgroundColorRGB: 0x74c2e1) {
 ////                SwiftMarkup.createElement(UIButton, centerX: 0, centerY = -10, title: "Push me", eventHandler: (event: .TouchUpInside, handler: self.buttonPushed))
             }
-////            SwiftMarkup.createElement(UIView, width: 100%, top: 200, right: 0, bottom: 0, left: 0, backgroundColor: UIColor.grayColor()) {
-////                SwiftMarkup.createElement(UITableView, width: 100%, height: 100%, dataSource: self)
-////            }
+            SwiftMarkup.createElement(UIView.self, top: 200, right: 0, bottom: 0, left: 0, backgroundColor: UIColor.lightGrayColor()) {
+//                SwiftMarkup.createElement(UITableView, width: 100%, height: 100%, dataSource: self)
+            }
         }
     }
     
