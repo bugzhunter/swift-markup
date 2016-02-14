@@ -17,6 +17,30 @@ override func viewDidLoad() {
 }
 ```
 
+With SwiftMarkup you can work in a similar way (well, not 100% similar):
+```swift
+override func viewDidLoad() {
+    super.viewDidLoad()
+
+    element(view) {
+
+        element(UIView.self, percentWidth: 100, height: 200, backgroundColorRGB: 0x74c2e1) {
+            element(UIButton.self, percentWidth: 100, top: 50, title: "Push me",
+                targetActions: [(target: self, action: "buttonPushed", events: .TouchUpInside)])
+
+        }
+
+        element(UIView.self, top: 200, right: 0, bottom: 0, left: 0) {
+            element(UITableView.self, id: &self.tableView,
+                percentWidth: 100, percentHeight: 100, backgroundColor: UIColor.lightGrayColor(), dataSource: self)
+        }
+
+    }
+
+    tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "defaultCell")
+}
+```
+
 ## Author
 
 bugzhunter, bugzhunter@gmail.com
