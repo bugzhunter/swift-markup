@@ -1,6 +1,6 @@
 //global aliases for SwiftMarkup class functions
 
-public func createElement(view: UIView,
+public func element(view: UIView,
     width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
     top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
     backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
@@ -13,7 +13,7 @@ public func createElement(view: UIView,
             content: content)
 }
 
-public func createElement(ViewClass: UIView.Type,
+public func element(ViewClass: UIView.Type,
     width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
     top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
     backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
@@ -26,7 +26,7 @@ public func createElement(ViewClass: UIView.Type,
             content: content)
 }
 
-public func createElement(ButtonClass: UIButton.Type,
+public func element(ButtonClass: UIButton.Type,
     width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
     top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
     title: String? = nil, targetActions: [(target: AnyObject, action: Selector, events: UIControlEvents)]? = nil) {
@@ -37,7 +37,7 @@ public func createElement(ButtonClass: UIButton.Type,
             title: title, targetActions: targetActions)
 }
 
-public func createElement(TableViewClass: UITableView.Type, inout id: UITableView?,
+public func element(TableViewClass: UITableView.Type, inout id: UITableView?,
     width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
     top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
     backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
