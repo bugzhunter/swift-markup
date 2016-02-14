@@ -9,7 +9,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         
-        SwiftMarkup.setAsRoot(view) {
+        SwiftMarkup.createElement(view) {
             SwiftMarkup.createElement(UIView.self, percentWidth: 100, height: 200, backgroundColorRGB: 0x74c2e1) {
                 
                 SwiftMarkup.createElement(UIButton.self,
@@ -20,11 +20,12 @@ class ViewController: UIViewController, UITableViewDataSource {
             SwiftMarkup.createElement(UIView.self, top: 200, right: 0, bottom: 0, left: 0) {
                 
                 SwiftMarkup.createElement(UITableView.self, id: &self.tableView,
-                    percentWidth: 100, percentHeight: 100, backgroundColor: UIColor.lightGrayColor(), dataSource: self,
-                    afterInit: {$0.registerClass(UITableViewCell.self, forCellReuseIdentifier: "defaultCell")})
+                    percentWidth: 100, percentHeight: 100, backgroundColor: UIColor.lightGrayColor(), dataSource: self)
                 
             }
         }
+        
+        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "defaultCell")
     }
     
     func buttonPushed() {

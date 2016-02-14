@@ -3,11 +3,21 @@ public class SwiftMarkup {
     private static var topView: UIView?
     public typealias ContentBlock = () -> Void
     
-    public class func setAsRoot(rootView: UIView, content: ContentBlock) {
-        let savedTopView = topView
-        topView = rootView
-        content()
-        topView = savedTopView
+    public class func createElement(view: UIView,
+        width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
+        top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
+        backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
+        content: ContentBlock? = nil) {
+            
+            manageBackground(view, backgroundColor: backgroundColor, backgroundColorRGB: backgroundColorRGB)
+            
+            manageLayout(view, parent: topView,
+                width: width, height: height, percentWidth: percentWidth, percentHeight: percentHeight,
+                top: top, right: right, bottom: bottom, left: left
+            )
+            
+            addContent(content, toView: view)
+            
     }
     
     public class func createElement(ViewClass: UIView.Type,
@@ -27,13 +37,8 @@ public class SwiftMarkup {
                 top: top, right: right, bottom: bottom, left: left
             )
             
+            addContent(content, toView: view)
             
-            //TODO avoid possible code duplication
-            let savedTopView = topView
-            topView = view
-            content?()
-            topView = savedTopView
-
     }
     
     public class func createElement(ButtonClass: UIButton.Type,
@@ -64,11 +69,9 @@ public class SwiftMarkup {
         width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
         top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
         backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
-        dataSource: UITableViewDataSource? = nil, delegate: UITableViewDelegate? = nil,
-        afterInit: ((tableView: UITableView) -> Void)? = nil) {
+        dataSource: UITableViewDataSource? = nil, delegate: UITableViewDelegate? = nil) {
             
             let tableView = TableViewClass.init()
-            afterInit?(tableView: tableView)
             id = tableView
             topView?.addSubview(tableView)
             
@@ -146,6 +149,13 @@ public class SwiftMarkup {
         if let rgb = backgroundColorRGB {
             view.backgroundColor = UIColor.colorFromARGB(0xFF000000 + rgb)
         }
+    }
+    
+    private class func addContent(content: ContentBlock?, toView view: UIView) {
+        let savedTopView = topView
+        topView = view
+        content?()
+        topView = savedTopView
     }
     
 }
