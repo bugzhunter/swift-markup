@@ -5,23 +5,11 @@ public class SwiftMarkup {
     private static var topView: UIView?
     private static let layout = Layout()
     
-    public class func createElement(view: UIView,
-        width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
-        top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
-        backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
-        content: ContentBlock? = nil) {
-            
-            manageBackground(view, backgroundColor: backgroundColor, backgroundColorRGB: backgroundColorRGB)
-            
-            layout.manage(view, parent: topView,
-                width: width, height: height, percentWidth: percentWidth, percentHeight: percentHeight,
-                top: top, right: right, bottom: bottom, left: left
-            )
-            
-            addContent(content, toView: view)
-            
-    }
     
+    public class func setRootView(view: UIView) {
+        topView = view
+    }
+        
     public class func createElement(ViewClass: UIView.Type,
         width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
         top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,

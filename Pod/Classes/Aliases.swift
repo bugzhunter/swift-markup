@@ -1,17 +1,5 @@
 //global aliases for SwiftMarkup class functions
 
-public func element(view: UIView,
-    width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
-    top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
-    backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
-    content: SwiftMarkup.ContentBlock? = nil) {
-        
-        SwiftMarkup.createElement(view,
-            width: width, height: height, percentWidth: percentWidth, percentHeight: percentHeight,
-            top: top, right: right, bottom: bottom, left: left,
-            backgroundColor: backgroundColor, backgroundColorRGB: backgroundColorRGB,
-            content: content)
-}
 
 public func element(ViewClass: UIView.Type,
     width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
