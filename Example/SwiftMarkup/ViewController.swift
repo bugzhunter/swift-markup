@@ -15,8 +15,8 @@ class ViewController: UIViewController, UITableViewDataSource {
                 touchUpInside: (target: self, action: "buttonPushed"))
         }
         element(UIView.self, top: 200, right: 0, bottom: 0, left: 0) {
-            element(UITableView.self, id: &self.tableView,
-                percentWidth: 100, percentHeight: 100, backgroundColor: UIColor.lightGrayColor(), dataSource: self)
+            element(UITableView.self, id: &self.tableView, percentWidth: 100, percentHeight: 100,
+                backgroundColor: UIColor.lightGrayColor(), dataSource: self)
         }
         
         tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "defaultCell")
