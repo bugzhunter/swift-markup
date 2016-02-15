@@ -17,12 +17,12 @@ public func element(ViewClass: UIView.Type,
 public func element(ButtonClass: UIButton.Type,
     width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
     top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
-    title: String? = nil, targetActions: [(target: AnyObject, action: Selector, events: UIControlEvents)]? = nil) {
+    title: String? = nil, touchUpInside: (target: AnyObject, action: Selector)? = nil) {
         
         SwiftMarkup.createElement(ButtonClass,
             width: width, height: height, percentWidth: percentWidth, percentHeight: percentHeight,
             top: top, right: right, bottom: bottom, left: left,
-            title: title, targetActions: targetActions)
+            title: title, touchUpInside: touchUpInside)
 }
 
 public func element(TableViewClass: UITableView.Type, inout id: UITableView?,

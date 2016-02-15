@@ -34,7 +34,7 @@ public class SwiftMarkup {
     public class func createElement(ButtonClass: UIButton.Type,
         width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
         top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
-        title: String? = nil, targetActions: [(target: AnyObject, action: Selector, events: UIControlEvents)]? = nil) {
+        title: String? = nil, touchUpInside: (target: AnyObject, action: Selector)? = nil) {
             
             let button = ButtonClass.init()
             topView?.addSubview(button)
@@ -47,10 +47,8 @@ public class SwiftMarkup {
             if let title = title {
                 button.setTitle(title, forState: .Normal)
             }
-            if let actions = targetActions {
-                for item in actions {
-                    button.addTarget(item.target, action: item.action, forControlEvents: item.events)
-                }
+            if let touchUpInside = touchUpInside {
+                button.addTarget(touchUpInside.target, action: touchUpInside.action, forControlEvents: .TouchUpInside)
             }
     
     }

@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDataSource {
 
         element(UIView.self, percentWidth: 100, height: 200, backgroundColorRGB: 0x74c2e1) {
             element(UIButton.self, percentWidth: 100, top: 50, title: "Push me",
-                targetActions: [(target: self, action: "buttonPushed", events: .TouchUpInside)])
+                touchUpInside: (target: self, action: "buttonPushed"))
             
         }
         element(UIView.self, top: 200, right: 0, bottom: 0, left: 0) {
