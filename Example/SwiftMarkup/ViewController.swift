@@ -9,18 +9,15 @@ class ViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         SwiftMarkup.setRootView(view)
-
+        
         element(UIView.self, percentWidth: 100, height: 200, backgroundColorRGB: 0x74c2e1) {
             element(UIButton.self, percentWidth: 100, top: 50, title: "Push me",
                 touchUpInside: (target: self, action: "buttonPushed"))
-            
         }
         element(UIView.self, top: 200, right: 0, bottom: 0, left: 0) {
             element(UITableView.self, id: &self.tableView,
                 percentWidth: 100, percentHeight: 100, backgroundColor: UIColor.lightGrayColor(), dataSource: self)
-            
         }
-
         
         tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "defaultCell")
     }
@@ -42,4 +39,3 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
 
 }
-
