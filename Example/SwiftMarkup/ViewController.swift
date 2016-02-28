@@ -8,15 +8,15 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SwiftMarkup.setRootView(view)
-        
-        $<UIView>(percentWidth: 100, height: 200, backgroundColorRGB: 0x74c2e1) >> {
-            $<UIButton>(title: "Push me", percentWidth: 100, top: 50,
-                touchUpInside: (target: self, action: "buttonPushed"))/>
-        }
-        $<UIView>(top: 200, right: 0, bottom: 0, left: 0) >> {
-            $<UITableView>(id: &self.tableView, dataSource: self,
-                percentWidth: 100, percentHeight: 100, backgroundColor: UIColor.lightGrayColor())/>
+        view >> {
+            $<UIView>(percentWidth: 100, height: 200, backgroundColorRGB: 0x74c2e1) >> {
+                $<UIButton>(title: "Push me", percentWidth: 100, top: 50,
+                    touchUpInside: (target: self, action: "buttonPushed"))/>
+            }
+            $<UIView>(top: 200, right: 0, bottom: 0, left: 0) >> {
+                $<UITableView>(id: &self.tableView, dataSource: self,
+                    percentWidth: 100, percentHeight: 100, backgroundColor: UIColor.lightGrayColor())/>
+            }
         }
         
         tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "defaultCell")

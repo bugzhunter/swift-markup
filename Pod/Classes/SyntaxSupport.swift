@@ -60,3 +60,7 @@ public postfix func /> <T> (wrapper: $<T>) -> T {
 public func >> (left: $<UIView>, right: SwiftMarkup.ContentBlock) {
     SwiftMarkup.addContent(right, toView: left.element)
 }
+
+public func >> (left: UIView, right: SwiftMarkup.ContentBlock) {    
+    SwiftMarkup.addContent(right, toView: left)
+}
