@@ -6,7 +6,5 @@ target 'SwiftMarkup_Example', :exclusive => true do
 end
 
 target 'SwiftMarkup_Tests', :exclusive => true do
-  pod 'SwiftMarkup', :path => '../'
-
-  
+  pod 'SwiftMarkup', :path => '../'  
 end

@@ -31,7 +31,7 @@ public class SwiftMarkup {
         width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
         top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
         backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
-        content: ContentBlock? = nil) {
+        content: ContentBlock? = nil) -> UIView {
             
             let view = ViewClass.init()
             topView?.addSubview(view)
@@ -45,13 +45,13 @@ public class SwiftMarkup {
             )
             
             addContent(content, toView: view)
-            
+            return view
     }
     
     public class func createElement(ButtonClass: UIButton.Type,
         width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
         top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
-        title: String? = nil, touchUpInside: (target: AnyObject, action: Selector)? = nil) {
+        title: String? = nil, touchUpInside: (target: AnyObject, action: Selector)? = nil) -> UIButton {
             
             let button = ButtonClass.init()
             topView?.addSubview(button)
@@ -67,14 +67,15 @@ public class SwiftMarkup {
             if let touchUpInside = touchUpInside {
                 button.addTarget(touchUpInside.target, action: touchUpInside.action, forControlEvents: .TouchUpInside)
             }
-    
+            
+            return button
     }
     
     public class func createElement(TableViewClass: UITableView.Type, inout id: UITableView?,
         width: CGFloat? = nil, height: CGFloat? = nil, percentWidth: CGFloat? = nil, percentHeight: CGFloat? = nil,
         top: CGFloat? = nil, right: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil,
         backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil,
-        dataSource: UITableViewDataSource? = nil, delegate: UITableViewDelegate? = nil) {
+        dataSource: UITableViewDataSource? = nil, delegate: UITableViewDelegate? = nil) -> UITableView {
             
             let tableView = TableViewClass.init()
             id = tableView
@@ -94,6 +95,14 @@ public class SwiftMarkup {
                 tableView.delegate = delegate
             }
             
+            return tableView
+    }
+    
+    public class func addContent(content: ContentBlock?, toView view: UIView) {
+        let savedTopView = topView
+        topView = view
+        content?()
+        topView = savedTopView
     }
     
     private class func manageBackground(view: UIView, backgroundColor: UIColor? = nil, backgroundColorRGB: UInt? = nil) {
@@ -101,26 +110,9 @@ public class SwiftMarkup {
             view.backgroundColor = backgroundColor
         }
         if let rgb = backgroundColorRGB {
-            view.backgroundColor = UIColor.colorFromARGB(0xFF000000 + rgb)
+            view.backgroundColor = UIColor.fromRGB(rgb)
         }
-    }
-    
-    private class func addContent(content: ContentBlock?, toView view: UIView) {
-        let savedTopView = topView
-        topView = view
-        content?()
-        topView = savedTopView
-    }
+    }        
     
 }
 
-extension UIColor {
-    public class func colorFromARGB(argb: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((argb & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((argb & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(argb & 0x0000FF) / 255.0,
-            alpha: CGFloat((argb & 0xFF000000) >> 24) / 255.0
-        )
-    }
-}
